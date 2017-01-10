@@ -8,6 +8,7 @@ var session = require('express-session');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var control = require('./routes/control');
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use(session({
   cookie: { maxAge: 60 * 1000 }
 }));
 app.use('/', index);
+app.use('/control',control);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
@@ -36,7 +38,7 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
+app.listen(3000);
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
